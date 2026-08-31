@@ -1,36 +1,30 @@
-# ShallowStream Core Method
+# ShallowStream
 
-This anonymous snapshot contains only the core ShallowStream method source for
-Qwen3-VL and LLaVA-OneVision. The benchmark runners, datasets, comparison
-methods, experiment scripts, tests, generated artifacts, and result records are
-intentionally not included.
+This anonymous snapshot contains the core ShallowStream method source for Qwen3-VL and LLaVA-OneVision.
 
-## Included
+## Code Structure
 
 - `src/shallowstream/qwen3vl/`: Qwen3-VL shallow prefill, streaming memory,
   routing, retrieval, selected-context reconstruction, and decoding.
-- `src/shallowstream/onevision/`: LLaVA-OneVision V3 implementation of the same
-  method, including its frame-native memory and retrieval path.
+- `src/shallowstream/onevision/`: LLaVA-OneVision shallow prefill, frame-native
+  memory, routing, retrieval, selected-context reconstruction, and decoding.
 - `src/shallowstream/common.py`, `evidence_retrieval.py`, `task_gate.py`, and
-  `history_decay_gate.py`: model-shared method primitives.
-- `src/config.py`, `src/modelclass.py`, and the small `src/utils/` subset:
-  internal dependencies required by the two runtimes.
-- `configs/shallowstream/`: runtime defaults and one current reference setting
-  for each model family. Model checkpoint paths remain unset.
-- `examples/smoke_inference.py`: one-video non-empty generation check shared by
-  the two standalone runtimes.
+  `history_decay_gate.py`: shared method primitives.
+- `src/config.py`, `src/modelclass.py`, and `src/utils/`: runtime configuration
+  and utilities used by both model families.
+- `configs/shallowstream/`: reference runtime configurations for Qwen3-VL and
+  LLaVA-OneVision.
+- `examples/smoke_inference.py`: standalone inference example for both models.
 
-## Scope
+## Example Usage
 
-This branch is a method-code snapshot, not a complete evaluation release. It
-does not include benchmark adapters or data and therefore does not reproduce
-reported benchmark scores by itself.
+Install the package:
 
-The Python package declares the direct runtime dependencies. FlashAttention is
-kept as an optional CUDA dependency because its installation must match the
-target PyTorch and CUDA build.
+```bash
+pip install -e .
+```
 
-Run a short generation after supplying a local checkpoint and video:
+Run Qwen3-VL:
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 PYTHONPATH=$PWD python examples/smoke_inference.py \
@@ -39,5 +33,11 @@ CUDA_VISIBLE_DEVICES=0 PYTHONPATH=$PWD python examples/smoke_inference.py \
   --video /path/to/video.mp4
 ```
 
-Use `--model onevision` with an LLaVA-OneVision Hugging Face checkpoint for the
-other runtime.
+Run LLaVA-OneVision:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=$PWD python examples/smoke_inference.py \
+  --model onevision \
+  --model-path /path/to/LLaVA-OneVision \
+  --video /path/to/video.mp4
+```
