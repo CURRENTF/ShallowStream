@@ -17,7 +17,7 @@ def parse_args():
         "--prompt",
         default="Describe the main visible action in one short sentence.",
     )
-    parser.add_argument("--max-new-tokens", type=int, default=8)
+    parser.add_argument("--max-new-tokens", type=int, default=16)
     return parser.parse_args()
 
 
