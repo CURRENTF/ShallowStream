@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shallowstream-core"
+version = "0.1.0"
+description = "Core ShallowStream method implementations for streaming video understanding"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+dependencies = [
+  "accelerate>=0.34,<2",
+  "decord==0.6.0",
+  "faster-whisper>=1,<2",
+  "numpy>=1.24,<3",
+  "pillow>=9.5,<13",
+  "qwen-vl-utils>=0.0.14,<0.1",
+  "torch>=2.4,<3",
+  "transformers==4.57.6",
+]
+
+[project.optional-dependencies]
+cuda = ["flash-attn==2.8.3"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
