@@ -17,6 +17,8 @@ intentionally not included.
   internal dependencies required by the two runtimes.
 - `configs/shallowstream/`: runtime defaults and one current reference setting
   for each model family. Model checkpoint paths remain unset.
+- `examples/smoke_inference.py`: one-video non-empty generation check shared by
+  the two standalone runtimes.
 
 ## Scope
 
@@ -27,3 +29,15 @@ reported benchmark scores by itself.
 The Python package declares the direct runtime dependencies. FlashAttention is
 kept as an optional CUDA dependency because its installation must match the
 target PyTorch and CUDA build.
+
+Run a short generation after supplying a local checkpoint and video:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=$PWD python examples/smoke_inference.py \
+  --model qwen3vl \
+  --model-path /path/to/Qwen3-VL-8B-Instruct \
+  --video /path/to/video.mp4
+```
+
+Use `--model onevision` with an LLaVA-OneVision Hugging Face checkpoint for the
+other runtime.
