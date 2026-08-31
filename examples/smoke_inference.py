@@ -29,7 +29,7 @@ def run_qwen(args):
             "model_path": args.model_path,
             "max_new_tokens": args.max_new_tokens,
             "max_sampled_frames": 8,
-            "streaming_prefill_batch_frames": 0,
+            "streaming_prefill_batch_frames": 8,
             "task_gate_mode": "off",
             "selected_generate_mode": "simple_prompt",
             "retrieval_recent_units": 2,
