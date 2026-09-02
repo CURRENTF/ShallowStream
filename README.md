@@ -1,6 +1,6 @@
 # ShallowStream
 
-This anonymous snapshot contains the core ShallowStream method source for Qwen3-VL and LLaVA-OneVision.
+This repo contains the core ShallowStream method source for Qwen3-VL and LLaVA-OneVision.
 
 ## Code Structure
 
